@@ -20,6 +20,7 @@ export default function MovieCard({
           height={300}
         />
       </section>
+      <img></img>
       <section className="w-2/3 p-2 xxs:p-4">
         <div className="space-y-2 overflow-hidden sm:space-y-3">
           <div>
