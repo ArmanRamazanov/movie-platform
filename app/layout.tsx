@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import MovieCard from "./components/MovieCard";
 import "./globals.css";
 import LayerProvider from "./layerProvider";

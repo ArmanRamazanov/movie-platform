@@ -1,0 +1,6 @@
+"use client";
+import { Spin } from "antd";
+
+export default function Spinner() {
+  return <Spin size="large" />;
+}
