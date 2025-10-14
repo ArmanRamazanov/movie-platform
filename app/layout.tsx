@@ -1,7 +1,7 @@
-import { Suspense } from "react";
-import MovieCard from "./components/MovieCard";
+import HeadLinks from "./components/HeadLinks";
 import "./globals.css";
 import LayerProvider from "./layerProvider";
+import { NuqsAdapter } from "nuqs/adapters/react";
 
 export default function RootLayout({
   children,
@@ -10,8 +10,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <LayerProvider>{children}</LayerProvider>
+      <body className="xl:px-40 bg-gray-200">
+        <LayerProvider>
+          <NuqsAdapter>
+            <main className="bg-white p-4 space-y-5">
+              <HeadLinks />
+              {children}
+            </main>
+          </NuqsAdapter>
+        </LayerProvider>
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 import type { Movie } from "../../types";
 import { format } from "date-fns";
-import Image from "next/image";
+import MovieCardImage from "./MovieCardImage";
 
 export default function MovieCard({
   posterPath,
@@ -12,13 +12,7 @@ export default function MovieCard({
   return (
     <article className="flex flex-row shadow-lg rounded-md">
       <section className="w-1/3">
-        <Image
-          src={`https://image.tmdb.org/t/p/w500${posterPath}`}
-          alt="poster image"
-          className="min-h-full min-w-full object-fill rounded-l-md"
-          width={300}
-          height={300}
-        />
+        <MovieCardImage posterPath={posterPath} />
       </section>
       <section className="w-2/3 p-2 xxs:p-4">
         <div className="space-y-2 overflow-hidden sm:space-y-3">

@@ -23,9 +23,11 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
+      "prepare\_/**",
+      "package-lock.json",
     ],
     rules: {
-      endOfLine: "off",
+      "prettier/prettier": ["error", { endOfLine: "auto" }],
     },
   },
 ];

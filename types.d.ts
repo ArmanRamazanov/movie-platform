@@ -10,6 +10,10 @@ type Movie = {
   [key: string]: unknown;
 };
 
+type SearchResult = {
+  results: Movie[];
+};
+
 type Genre = {
   id: number;
   name: string;

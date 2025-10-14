@@ -28,6 +28,10 @@ export default function LayerProvider({
     };
   }, []);
 
+  useEffect(() => {
+    fetch("http://localhost:3000/api/guestSession");
+  }, []);
+
   return (
     <StyleProvider layer>
       <ConfigProvider>

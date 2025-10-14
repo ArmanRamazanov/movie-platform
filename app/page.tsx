@@ -1,12 +1,21 @@
 import MovieCard from "./components/MovieCard";
-import type { Movie } from "../types";
+import type { SearchResult } from "../types";
+import Search from "./components/Search";
+import PaginationComponent from "./components/Pagination";
+import { cookies } from "next/headers";
 
-export default async function page() {
+export default async function page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   let moviesResponse;
-  let moviesList;
+  let result: SearchResult;
+  const page = (await searchParams)["page"] ?? "1";
+
   try {
     moviesResponse = await fetch(
-      "https://api.themoviedb.org/3/discover/movie",
+      `https://api.themoviedb.org/3/discover/movie?page=${page}`,
       {
         method: "GET",
         headers: {
@@ -16,15 +25,27 @@ export default async function page() {
     );
     if (!moviesResponse.ok)
       throw { message: "We are having some problems. Please visit us later!" };
-    moviesList = await moviesResponse.json();
+    result = await moviesResponse.json();
   } catch (error: unknown) {
     throw new Error((error as { message: string }).message);
   }
 
+  const cookiesStorage = await cookies();
+
+  let guestSessionId = cookiesStorage.get("guestSessionId") || "";
+
+  if (!guestSessionId) {
+    const response = await fetch("http://localhost:3000/api/guestSession");
+    guestSessionId = await response.json();
+  }
+
+  console.log("search: ", guestSessionId);
+
   return (
-    <main className=" bg-gray-200 xl:px-40">
-      <ul className="grid grid-cols-1 gap-4 bg-white p-4 md:grid-cols-2">
-        {moviesList?.results.map((movie: Movie) => (
+    <section className="space-y-5">
+      <Search></Search>
+      <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {result?.results.map((movie: Movie) => (
           <MovieCard
             key={movie.id}
             posterPath={movie.poster_path}
@@ -36,6 +57,7 @@ export default async function page() {
           />
         ))}
       </ul>
-    </main>
+      <PaginationComponent></PaginationComponent>
+    </section>
   );
 }

@@ -5,6 +5,13 @@
 @theme {
   --color-light-gray: #827e7e;
   --breakpoint-xxs: 34.375rem;
+  --color-active-link-col: #1890ff;
+}
+
+@layer components {
+  .active-link {
+    @apply text-active-link-col underline underline-offset-8 decoration-active-link-col;
+  }
 }
 
 html,
