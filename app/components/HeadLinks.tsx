@@ -14,8 +14,6 @@ export default function HeadLinks() {
       href: "/rated",
     },
   ];
-
-  console.log(pathname === links[0].href);
   return (
     <div className="flex flex-row justify-center align-middle gap-5">
       {links.map((link) => (

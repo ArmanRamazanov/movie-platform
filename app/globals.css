@@ -4,6 +4,10 @@
 
 @theme {
   --color-light-gray: #827e7e;
+  --color-rating-bad: #e90000;
+  --color-rating-fair: #e97e00;
+  --color-rating-good: #e9d100;
+  --color-rating-excellent: #66e900;
   --breakpoint-xxs: 34.375rem;
   --color-active-link-col: #1890ff;
 }

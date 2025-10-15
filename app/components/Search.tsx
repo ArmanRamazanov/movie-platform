@@ -6,6 +6,7 @@ import type { SearchResult } from "../../types";
 import type { Movie } from "../../types";
 import { format } from "date-fns";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function SearchFunctionality() {
   const [searchValue, setSearchValue] = useState("");
@@ -14,7 +15,6 @@ export default function SearchFunctionality() {
   });
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  console.log(!searchValue);
   const debouncedFunction = useMemo(
     () =>
       debounce(async (value: string) => {
@@ -39,7 +39,6 @@ export default function SearchFunctionality() {
       }, 300),
     [],
   );
-  console.log(searchResult);
   return (
     <div className="relative space-y-1 mb-8">
       <Input
@@ -69,13 +68,16 @@ export default function SearchFunctionality() {
             key={movie.id}
           >
             <section>
-              <img
+              <Image
                 className="max-h-30 max-w-20"
                 src={`https://image.tmdb.org/t/p/w154/${movie.poster_path}`}
                 onError={(ev) =>
                   (ev.currentTarget.src = "/icons/defaultImage.png")
                 }
-              />
+                alt="image poster"
+                width={154}
+                height={140}
+              ></Image>
             </section>
             <section className="flex-1 px-3 space-y-1.5">
               <div>

@@ -17,6 +17,7 @@ export async function GET() {
   const nextResponse = NextResponse.json(data);
   nextResponse.cookies.set("guestSessionId", data.guest_session_id, {
     path: "/",
+    expires: new Date(Date.now() + 30 * 60 * 1000),
   });
 
   return nextResponse;

@@ -4,7 +4,7 @@ import MovieCard from "../components/MovieCard";
 
 export default async function page() {
   const guestSessionId = (await cookies()).get("guestSessionId")?.value || "";
-
+  console.log(guestSessionId);
   let ratedMovies: Movies[];
   try {
     const response = await fetch(
@@ -25,7 +25,7 @@ export default async function page() {
     const errorObject = error as { status: number };
 
     if (errorObject.status === 404) {
-      throw new Error("No movies rated");
+      throw new Error("No rated movies");
     } else {
       throw new Error("Something went wrong. Please try again later!");
     }
@@ -33,7 +33,7 @@ export default async function page() {
 
   return (
     <section>
-      <ul>
+      <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {ratedMovies.map((movie) => (
           <MovieCard
             key={movie.id}
@@ -43,6 +43,8 @@ export default async function page() {
             releaseDate={movie.release_date}
             genreIds={movie.genre_ids}
             backdrop_path={movie.backdrop_path}
+            movieId={movie.id}
+            vote_average={movie.vote_average}
           ></MovieCard>
         ))}
       </ul>

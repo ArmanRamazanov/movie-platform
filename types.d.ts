@@ -8,6 +8,7 @@ type Movie = {
   genre_ids: number[];
   backgrop_path: string;
   [key: string]: unknown;
+  vote_average: number;
 };
 
 type SearchResult = {
@@ -17,4 +18,8 @@ type SearchResult = {
 type Genre = {
   id: number;
   name: string;
+};
+
+type GenresObject = {
+  [key: string]: string;
 };

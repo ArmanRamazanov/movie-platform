@@ -39,8 +39,6 @@ export default async function page({
     guestSessionId = await response.json();
   }
 
-  console.log("search: ", guestSessionId);
-
   return (
     <section className="space-y-5">
       <Search></Search>
@@ -54,6 +52,8 @@ export default async function page({
             releaseDate={movie.release_date}
             genreIds={movie.genre_ids}
             backdrop_path={movie.backdrop_path}
+            movieId={movie.id}
+            vote_average={movie.vote_average}
           />
         ))}
       </ul>
